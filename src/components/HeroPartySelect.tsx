@@ -152,6 +152,9 @@ function CharEquipScreen({ persona }: CharScreenProps) {
     persona.id === 'ghost'     ? `/kirby-${frame}.png` :
     '/pixel.png'
 
+  const allGear = [...persona.leftGear, ...persona.rightGear].filter(g => g.ilvl > 0)
+  const avgIlvl = Math.round(allGear.reduce((sum, g) => sum + g.ilvl, 0) / allGear.length)
+
   return (
     <div className="char-screen">
       {/* Header */}
@@ -168,7 +171,7 @@ function CharEquipScreen({ persona }: CharScreenProps) {
           </span>
         </div>
         <div className="font-bold" style={{ color: persona.color }}>
-          ✦{persona.iLevel}
+          ✦{avgIlvl}
         </div>
       </div>
 
