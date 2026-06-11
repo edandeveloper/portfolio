@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { personas } from '../data/personas'
 import type { GearSlotData } from '../data/personas'
@@ -83,6 +83,19 @@ interface CharScreenProps {
 }
 
 function CharEquipScreen({ persona }: CharScreenProps) {
+  const [frame, setFrame] = useState(1)
+
+  useEffect(() => {
+    if (persona.id !== 'auteur' && persona.id !== 'wordsmith') return
+    const id = setInterval(() => setFrame(f => f === 1 ? 2 : 1), 300)
+    return () => { clearInterval(id); setFrame(1) }
+  }, [persona.id])
+
+  const spriteUrl =
+    persona.id === 'auteur'    ? `/walking-${frame}.png` :
+    persona.id === 'wordsmith' ? `/idle-${frame}.png`    :
+    '/pixel.png'
+
   return (
     <div className="char-screen">
       {/* Header */}
@@ -124,7 +137,7 @@ function CharEquipScreen({ persona }: CharScreenProps) {
             {/* Pixel sprite — crop to front-facing frame (top-left of 4×2 sheet) */}
             <div className="pixel-sprite-wrapper">
               <img
-                src="/pixel.png"
+                src={spriteUrl}
                 alt="Edan"
                 className="pixel-sprite-img"
                 draggable={false}
