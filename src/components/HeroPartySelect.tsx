@@ -226,7 +226,7 @@ export default function HeroPartySelect() {
             EDAN ZHAO
           </motion.h1>
           <motion.div variants={fadeUp} className="font-ui text-text-dim text-sm mt-1 tracking-wide">
-            Sydney, Australia
+            Brisbane, Australia
           </motion.div>
         </motion.div>
 

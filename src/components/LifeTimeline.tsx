@@ -7,15 +7,16 @@ import { timelineEvents } from '../data/timeline'
 gsap.registerPlugin(ScrollTrigger)
 
 const phaseColors: Record<string, string> = {
-  origin: '#ffd700',
-  growth: '#4ecca3',
+  origin:    '#ffd700',
+  growth:    '#4ecca3',
   awakening: '#c084fc',
-  ascent: '#ff8800',
-  present: '#ff3333',
+  work:      '#60a5fa',
+  ascent:    '#ff8800',
+  present:   '#ff3333',
 }
 
 export default function LifeTimeline() {
-  const [activeId, setActiveId] = useState('present')
+  const [activeId, setActiveId] = useState('birth')
   const sectionRef = useRef<HTMLDivElement>(null)
   const barFillRef = useRef<HTMLDivElement>(null)
   const scrollContainerRef = useRef<HTMLDivElement>(null)
@@ -57,7 +58,7 @@ export default function LifeTimeline() {
           transition={{ duration: 0.5 }}
         >
           <div className="section-subheading mb-2">◆ ADVENTURE LOG ◆</div>
-          <h2 className="section-heading text-3xl md:text-4xl">Chronicle</h2>
+          <h2 className="section-heading text-3xl md:text-4xl">The Hero's Journey</h2>
         </motion.div>
 
         <motion.div
@@ -67,7 +68,7 @@ export default function LifeTimeline() {
           transition={{ duration: 0.6 }}
           className="ffxiv-panel rounded-sm overflow-hidden"
         >
-          <div className="ffxiv-panel-title">LIFE RECORD — ATB TIMELINE</div>
+          <div className="ffxiv-panel-title">HERO'S JOURNEY — ATB TIMELINE</div>
 
           <div className="p-6">
             {/* ATB bar track */}

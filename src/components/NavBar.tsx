@@ -4,7 +4,7 @@ const navLinks = [
   { id: 'hero', label: 'Status' },
   { id: 'inventory', label: 'Inventory' },
   { id: 'projects', label: 'Projects' },
-  { id: 'timeline', label: 'Chronicle' },
+  { id: 'timeline', label: 'Journey' },
   { id: 'contact', label: 'Contact' },
 ]
 
