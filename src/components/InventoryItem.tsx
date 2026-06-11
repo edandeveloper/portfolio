@@ -6,6 +6,7 @@ const rarityColors: Record<Item['rarity'], string> = {
   common: '#8899aa',
   uncommon: '#4ecca3',
   rare: '#ffd700',
+  epic: '#c084fc',
   unique: '#ff3333',
 }
 

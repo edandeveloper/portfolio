@@ -8,12 +8,14 @@ const rarityColors: Record<InventoryItem['rarity'], string> = {
   common: '#8899aa',
   uncommon: '#4ecca3',
   rare: '#ffd700',
+  epic: '#c084fc',
   unique: '#ff3333',
 }
 const rarityLabels: Record<InventoryItem['rarity'], string> = {
   common: 'COMMON',
   uncommon: 'UNCOMMON',
   rare: 'RARE',
+  epic: 'EPIC',
   unique: 'UNIQUE',
 }
 
@@ -156,6 +158,28 @@ export default function InventoryGrid() {
                     >
                       {selected.description}
                     </div>
+
+                    {selected.link && (
+                      <a
+                        href={selected.link}
+                        target={selected.link.startsWith('http') ? '_blank' : '_self'}
+                        rel={selected.link.startsWith('http') ? 'noopener noreferrer' : undefined}
+                        className="inline-block mb-4 px-3 py-1.5 font-ui font-bold text-xs tracking-widest uppercase transition-all"
+                        style={{
+                          color: rarityColors[selected.rarity],
+                          border: `1px solid ${rarityColors[selected.rarity]}`,
+                          background: `${rarityColors[selected.rarity]}11`,
+                        }}
+                        onMouseEnter={e => {
+                          (e.currentTarget as HTMLElement).style.background = `${rarityColors[selected.rarity]}22`
+                        }}
+                        onMouseLeave={e => {
+                          (e.currentTarget as HTMLElement).style.background = `${rarityColors[selected.rarity]}11`
+                        }}
+                      >
+                        {selected.linkLabel ?? '▶ Open'}
+                      </a>
+                    )}
 
                     <div className="flex justify-between text-xs font-mono text-text-muted">
                       <span>QTY: {selected.quantity}</span>

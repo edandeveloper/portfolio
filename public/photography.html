@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Photography — Edan Zhao</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700&family=Rajdhani:wght@400;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: #080c14;
+      color: #e8e8e8;
+      font-family: 'Rajdhani', sans-serif;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: repeating-linear-gradient(135deg, #1a3a6b 0px, #1a3a6b 18px, #0d1f3c 18px, #0d1f3c 36px);
+      opacity: 0.15;
+      pointer-events: none;
+    }
+
+    .panel {
+      position: relative;
+      background: #0f1826;
+      border: 1px solid rgba(78, 204, 163, 0.3);
+      box-shadow: inset 0 1px 0 rgba(78, 204, 163, 0.15), 0 8px 40px rgba(0,0,0,0.7);
+      max-width: 560px;
+      width: 90%;
+      text-align: center;
+    }
+
+    .panel-title {
+      background: linear-gradient(90deg, #1a2840 0%, #0f1826 100%);
+      border-bottom: 1px solid rgba(78, 204, 163, 0.4);
+      padding: 8px 16px;
+      font-family: 'Rajdhani', sans-serif;
+      font-weight: 700;
+      font-size: 13px;
+      letter-spacing: 0.1em;
+      color: #4ecca3;
+      text-transform: uppercase;
+      text-align: left;
+    }
+
+    .panel-body {
+      padding: 40px 32px;
+    }
+
+    h1 {
+      font-family: 'Cinzel', serif;
+      font-size: 28px;
+      color: #ffd700;
+      text-shadow: 0 0 12px rgba(255,215,0,0.5);
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+
+    .sub {
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 12px;
+      color: #4ecca3;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      opacity: 0.7;
+      margin-bottom: 28px;
+    }
+
+    .status {
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 13px;
+      color: #8899aa;
+      line-height: 1.8;
+      margin-bottom: 32px;
+    }
+
+    .status .cursor {
+      display: inline-block;
+      width: 8px;
+      height: 1em;
+      background: #4ecca3;
+      margin-left: 4px;
+      vertical-align: text-bottom;
+      animation: blink 1s step-end infinite;
+      box-shadow: 0 0 6px rgba(78,204,163,0.8);
+    }
+
+    .back-link {
+      display: inline-block;
+      padding: 8px 20px;
+      font-family: 'Rajdhani', sans-serif;
+      font-weight: 700;
+      font-size: 13px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      text-decoration: none;
+      color: #4ecca3;
+      border: 1px solid rgba(78,204,163,0.4);
+      background: rgba(78,204,163,0.06);
+      transition: all 0.2s;
+    }
+
+    .back-link:hover {
+      background: rgba(78,204,163,0.14);
+      border-color: #4ecca3;
+      box-shadow: 0 0 12px rgba(78,204,163,0.3);
+    }
+
+    @keyframes blink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0; }
+    }
+  </style>
+</head>
+<body>
+  <div class="panel">
+    <div class="panel-title">◈ GALLERY — PHOTOGRAPHY</div>
+    <div class="panel-body">
+      <h1>Edan Zhao</h1>
+      <div class="sub">◆ Photography Portfolio ◆</div>
+      <div class="status">
+        Loading gallery...<br />
+        <span style="color:#ffd700;">[ COMING SOON ]</span><span class="cursor"></span>
+      </div>
+      <a href="/" class="back-link">◀ Back to Portfolio</a>
+    </div>
+  </div>
+</body>
+</html>
