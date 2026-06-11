@@ -1,0 +1,461 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  *, *::before, *::after {
+    box-sizing: border-box;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    margin: 0;
+    background-color: #080c14;
+    color: #e8e8e8;
+    font-family: 'Rajdhani', sans-serif;
+    overflow-x: hidden;
+  }
+
+  #root {
+    width: 100%;
+    min-height: 100vh;
+  }
+
+  ::-webkit-scrollbar       { width: 6px; }
+  ::-webkit-scrollbar-track { background: #080c14; }
+  ::-webkit-scrollbar-thumb { background: #4ecca3; border-radius: 3px; }
+  ::-webkit-scrollbar-thumb:hover { background: #ffd700; }
+}
+
+@layer components {
+  /* FF7-style diagonal stripe background */
+  .ff7-stripes {
+    background-image: repeating-linear-gradient(
+      135deg,
+      #1a3a6b 0px,
+      #1a3a6b 18px,
+      #0d1f3c 18px,
+      #0d1f3c 36px
+    );
+  }
+
+  /* FFXIV panel */
+  .ffxiv-panel {
+    background: #0f1826;
+    border: 1px solid rgba(78, 204, 163, 0.3);
+    box-shadow: inset 0 1px 0 rgba(78, 204, 163, 0.15), 0 4px 24px rgba(0, 0, 0, 0.6);
+  }
+
+  .ffxiv-panel-title {
+    background: linear-gradient(90deg, #1a2840 0%, #0f1826 100%);
+    border-bottom: 1px solid rgba(78, 204, 163, 0.4);
+    padding: 6px 12px;
+    font-family: 'Rajdhani', sans-serif;
+    font-weight: 700;
+    font-size: 13px;
+    letter-spacing: 0.1em;
+    color: #4ecca3;
+    text-transform: uppercase;
+  }
+
+  /* Inventory slot */
+  .inv-slot {
+    position: relative;
+    width: 56px;
+    height: 56px;
+    background: #0a1420;
+    border: 1px solid rgba(78, 204, 163, 0.2);
+    cursor: pointer;
+    transition: all 0.15s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+  }
+  .inv-slot:hover {
+    border-color: #4ecca3;
+    background: #0f1e30;
+    box-shadow: 0 0 8px rgba(78, 204, 163, 0.4), inset 0 0 8px rgba(78, 204, 163, 0.1);
+    z-index: 2;
+  }
+  .inv-slot.active {
+    border-color: #ffd700;
+    background: #1a1500;
+    box-shadow: 0 0 8px rgba(255, 215, 0, 0.5), inset 0 0 8px rgba(255, 215, 0, 0.1);
+  }
+
+  .inv-qty {
+    position: absolute;
+    bottom: 2px;
+    right: 3px;
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 9px;
+    color: #8899aa;
+    line-height: 1;
+  }
+
+  /* FF7 stat bar */
+  .stat-bar-track {
+    height: 10px;
+    background: #0a0e1a;
+    border: 1px solid rgba(78, 204, 163, 0.2);
+    border-radius: 1px;
+    overflow: hidden;
+  }
+  .stat-bar-fill {
+    height: 100%;
+    border-radius: 1px;
+    transition: width 1.2s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  /* ATB bar — teal themed instead of hacker green */
+  .atb-bar {
+    height: 12px;
+    background: repeating-linear-gradient(
+      90deg,
+      #4ecca3 0px,
+      #4ecca3 18px,
+      #1a4a40 18px,
+      #1a4a40 20px
+    );
+    border-radius: 1px;
+    box-shadow: 0 0 6px rgba(78, 204, 163, 0.5);
+  }
+
+  /* Terminal — kept for ContactTerminal */
+  .terminal-text {
+    font-family: 'Share Tech Mono', monospace;
+    color: #4ecca3;
+    text-shadow: 0 0 6px rgba(78, 204, 163, 0.5);
+  }
+  .terminal-prompt::before {
+    content: 'edan@portfolio:~$ ';
+    color: #4ecca3;
+    text-shadow: 0 0 6px rgba(78, 204, 163, 0.6);
+  }
+  .cursor-blink {
+    display: inline-block;
+    width: 8px;
+    height: 1em;
+    background: #4ecca3;
+    margin-left: 2px;
+    vertical-align: text-bottom;
+    animation: cursorBlink 1s step-end infinite;
+    box-shadow: 0 0 6px rgba(78, 204, 163, 0.8);
+  }
+
+  /* FF7 project card */
+  .ff7-card {
+    background: #0f1826;
+    border: 1px solid rgba(78, 204, 163, 0.25);
+    border-top: 2px solid #ffd700;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.2s ease;
+  }
+  .ff7-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: repeating-linear-gradient(
+      135deg,
+      rgba(26, 58, 107, 0.3) 0px,
+      rgba(26, 58, 107, 0.3) 18px,
+      transparent 18px,
+      transparent 36px
+    );
+    pointer-events: none;
+  }
+  .ff7-card:hover {
+    border-color: rgba(78, 204, 163, 0.6);
+    box-shadow: 0 0 20px rgba(78, 204, 163, 0.2), 0 8px 32px rgba(0, 0, 0, 0.5);
+    transform: translateY(-2px);
+  }
+
+  /* Section headings */
+  .section-heading {
+    font-family: 'Cinzel', serif;
+    font-weight: 700;
+    color: #4ecca3;
+    text-shadow: 0 0 12px rgba(78, 204, 163, 0.5);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+  }
+  .section-subheading {
+    font-family: 'Share Tech Mono', monospace;
+    color: #4ecca3;
+    font-size: 12px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    opacity: 0.7;
+  }
+
+  /* Timeline node */
+  .timeline-node {
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: #0f1826;
+    border: 2px solid #4ecca3;
+    position: relative;
+    flex-shrink: 0;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+  .timeline-node.active {
+    background: #ffd700;
+    border-color: #ffd700;
+    animation: nodePulse 2s ease-in-out infinite;
+  }
+  .timeline-node:hover {
+    border-color: #ffd700;
+    background: rgba(255, 215, 0, 0.2);
+  }
+
+  /* Nav item */
+  .nav-item {
+    font-family: 'Rajdhani', sans-serif;
+    font-weight: 600;
+    font-size: 14px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: #8899aa;
+    cursor: pointer;
+    position: relative;
+    padding: 4px 12px;
+    transition: color 0.2s ease;
+  }
+  .nav-item::before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 12px;
+    right: 12px;
+    height: 1px;
+    background: #4ecca3;
+    transform: scaleX(0);
+    transition: transform 0.2s ease;
+  }
+  .nav-item:hover { color: #4ecca3; }
+  .nav-item:hover::before { transform: scaleX(1); }
+  .nav-item.active { color: #ffd700; }
+  .nav-item.active::before { background: #ffd700; transform: scaleX(1); }
+
+  /* ── Persona tab ─────────────────────────────────── */
+  .persona-tab {
+    font-family: 'Rajdhani', sans-serif;
+    font-weight: 700;
+    font-size: 12px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: #8899aa;
+    padding: 6px 14px;
+    border: 1px solid rgba(78, 204, 163, 0.2);
+    border-bottom-width: 2px;
+    background: rgba(15, 24, 38, 0.7);
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+  .persona-tab:hover {
+    background: rgba(78, 204, 163, 0.08);
+    color: #e8e8e8;
+  }
+
+  /* ── FFXIV Character Equipment Screen ────────────── */
+  .char-screen {
+    background: linear-gradient(180deg, #0a1220 0%, #080c18 100%);
+    border: 1px solid rgba(78, 204, 163, 0.35);
+    box-shadow: inset 0 1px 0 rgba(78, 204, 163, 0.1), 0 8px 40px rgba(0, 0, 0, 0.7);
+    border-radius: 2px;
+    overflow: hidden;
+  }
+
+  .char-screen-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 8px 14px;
+    background: linear-gradient(90deg, #111c2e 0%, #080c18 100%);
+    border-bottom: 1px solid rgba(78, 204, 163, 0.25);
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #8899aa;
+  }
+
+  .char-screen-body {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    gap: 0;
+    padding: 16px;
+    min-height: 600px;
+  }
+
+  @media (max-width: 640px) {
+    .char-screen-body {
+      grid-template-columns: 1fr;
+      grid-template-rows: auto auto auto;
+    }
+    .char-screen-left,
+    .char-screen-right {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 6px;
+      padding: 0 0 8px 0;
+    }
+  }
+
+  .char-screen-left {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    padding-right: 14px;
+    border-right: 1px solid rgba(78, 204, 163, 0.12);
+  }
+
+  .char-screen-center {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 0 10px;
+  }
+
+  .char-screen-right {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    padding-left: 14px;
+    border-left: 1px solid rgba(78, 204, 163, 0.12);
+  }
+
+  /* ── Gear slot box ───────────────────────────────── */
+  .gear-slot-box {
+    width: 96px;
+    height: 96px;
+    background: rgba(8, 12, 24, 0.9);
+    border: 1px solid rgba(78, 204, 163, 0.25);
+    border-radius: 2px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    position: relative;
+    gap: 1px;
+  }
+
+  .gear-slot-ilvl {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 8px;
+    opacity: 0.75;
+    line-height: 1;
+  }
+
+  .gear-slot-label {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 9px;
+    color: #445566;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    text-align: center;
+    max-width: 96px;
+  }
+
+  .gear-tooltip {
+    position: absolute;
+    bottom: calc(100% + 6px);
+    left: 50%;
+    transform: translateX(-50%);
+    background: #0a1628;
+    border: 1px solid rgba(78, 204, 163, 0.4);
+    padding: 6px 10px;
+    white-space: nowrap;
+    z-index: 100;
+    pointer-events: none;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.8);
+  }
+
+  /* ── Pixel sprite ────────────────────────────────── */
+  .char-model-frame {
+    width: 110px;
+    height: 160px;
+    background: linear-gradient(180deg, #0d1a30 0%, #060a14 100%);
+    border: 1px solid;
+    border-radius: 2px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    position: relative;
+  }
+
+  /* Inner vignette */
+  .char-model-frame::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at center, transparent 40%, rgba(0,0,0,0.5) 100%);
+    pointer-events: none;
+  }
+
+  .pixel-sprite-wrapper {
+    /* Crop to top-left frame of the 4×2 spritesheet */
+    width: 120px;
+    height: 120px;
+    overflow: hidden;
+    position: relative;
+    image-rendering: pixelated;
+  }
+
+  .pixel-sprite-img {
+    position: absolute;
+    /* 4 columns wide → multiply width by 4 to isolate column 0 */
+    width: 400%;
+    height: auto;
+    top: 0;
+    left: 0;
+    image-rendering: pixelated;
+    image-rendering: crisp-edges;
+  }
+}
+
+/* ── Scanline overlay ────────────────────────────────── */
+.scanlines-overlay {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 9999;
+  background-image: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(0, 0, 0, 0.05) 2px,
+    rgba(0, 0, 0, 0.05) 4px
+  );
+}
+
+/* ── Glow helpers ────────────────────────────────────── */
+.glow-teal {
+  text-shadow: 0 0 8px rgba(78, 204, 163, 0.7), 0 0 16px rgba(78, 204, 163, 0.3);
+}
+.glow-gold {
+  text-shadow: 0 0 8px rgba(255, 215, 0, 0.7), 0 0 16px rgba(255, 215, 0, 0.3);
+}
+
+@keyframes cursorBlink {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0; }
+}
+@keyframes nodePulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(255,215,0,0.6); }
+  50%      { box-shadow: 0 0 0 8px rgba(255,215,0,0); }
+}
