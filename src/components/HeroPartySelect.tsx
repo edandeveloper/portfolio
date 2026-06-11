@@ -11,12 +11,12 @@ const MINI_SPRITES: Record<string, [string, string]> = {
 }
 
 const stats = [
-  { label: 'VISION',    sublabel: 'Photography / Film', value: 85, color: '#ffd700' },
-  { label: 'CHRONICLE', sublabel: 'Writing & Blog',     value: 78, color: '#4ecca3' },
-  { label: 'RESONANCE', sublabel: 'Music',              value: 68, color: '#c084fc' },
-  { label: 'ARCANE',    sublabel: 'Frontend Dev',       value: 80, color: '#4ecca3' },
-  { label: 'WANDERER',  sublabel: 'Life & Adventure',   value: 72, color: '#60a5fa' },
-  { label: 'FATE',      sublabel: 'Life RNG',           value: 99, color: '#ff3333' },
+  { label: 'VISION',    sublabel: 'Photography / Film', value: 63, color: '#ffd700' },
+  { label: 'CHRONICLE', sublabel: 'Writing & Blog',     value: 47, color: '#4ecca3' },
+  { label: 'RESONANCE', sublabel: 'Music',              value: 74, color: '#c084fc' },
+  { label: 'ARCANE',    sublabel: 'Software Dev',       value: 38, color: '#4ecca3' },
+  { label: 'WANDERER',  sublabel: 'Life & Adventure',   value: 11, color: '#60a5fa' },
+  { label: 'FATE',      sublabel: 'Life RNG',           value: 50, color: '#ff3333' },
 ]
 
 const fadeUp = {
