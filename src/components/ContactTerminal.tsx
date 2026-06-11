@@ -9,18 +9,17 @@ const contactLines = [
   { delay: 1300, prompt: false, text: '╚═══════════════════════════════════╝' },
   { delay: 1500, prompt: false, text: '' },
   { delay: 1700, prompt: false, text: '  Email:    zhao.edan@gmail.com' },
-  { delay: 1900, prompt: false, text: '  GitHub:   github.com/edanzhao' },
-  { delay: 2100, prompt: false, text: '  LinkedIn: linkedin.com/in/edanzhao' },
+  { delay: 1900, prompt: false, text: '  GitHub:   github.com/edandeveloper' },
+  { delay: 2100, prompt: false, text: '  LinkedIn: linkedin.com/in/edan-zhao-1b3634228' },
   { delay: 2300, prompt: false, text: '' },
-  { delay: 2500, prompt: false, text: '  STATUS:   Open to opportunities' },
-  { delay: 2700, prompt: false, text: '  SEEKING:  Creative / Technical roles' },
-  { delay: 2900, prompt: false, text: '' },
+  { delay: 2500, prompt: false, text: '  STATUS:   Studying in my third year while juggling SAP work and filmmaking' },
+  { delay: 2700, prompt: false, text: '' },
 ]
 
 const socialLinks = [
   { flag: '--email',    label: 'zhao.edan@gmail.com',       href: 'mailto:zhao.edan@gmail.com', color: '#4ecca3' },
-  { flag: '--github',   label: 'github.com/edanzhao',        href: '#',                          color: '#4ecca3' },
-  { flag: '--linkedin', label: 'linkedin.com/in/edanzhao',   href: '#',                          color: '#ffd700' },
+  { flag: '--github',   label: 'github.com/edandeveloper',                    href: 'https://github.com/edandeveloper',                              color: '#4ecca3' },
+  { flag: '--linkedin', label: 'linkedin.com/in/edan-zhao-1b3634228',         href: 'https://www.linkedin.com/in/edan-zhao-1b3634228/',              color: '#ffd700' },
 ]
 
 export default function ContactTerminal() {
@@ -147,6 +146,8 @@ export default function ContactTerminal() {
             <a
               key={link.flag}
               href={link.href}
+              target="_blank"
+              rel="noopener noreferrer"
               className="flex items-center gap-3 px-4 py-3 rounded-sm group transition-all"
               style={{
                 background: 'rgba(78,204,163,0.04)',
