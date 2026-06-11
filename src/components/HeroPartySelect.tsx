@@ -93,7 +93,7 @@ function CharEquipScreen({ persona }: CharScreenProps) {
   }, [persona.id])
 
   const spriteUrl =
-    persona.id === 'auteur'    ? `/walking-${frame}.png` :
+    persona.id === 'auteur'    ? `/working-${frame}.png` :
     persona.id === 'wordsmith' ? `/idle-${frame}.png`    :
     persona.id === 'bard'      ? `/weights-${frame}.png` :
     persona.id === 'ghost'     ? `/kirby-${frame}.png` :
