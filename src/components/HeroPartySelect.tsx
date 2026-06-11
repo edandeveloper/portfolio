@@ -86,7 +86,8 @@ function CharEquipScreen({ persona }: CharScreenProps) {
   const [frame, setFrame] = useState(1)
 
   useEffect(() => {
-    if (persona.id !== 'auteur' && persona.id !== 'wordsmith' && persona.id !== 'bard') return
+    const animated = ['auteur', 'wordsmith', 'bard', 'ghost']
+    if (!animated.includes(persona.id)) return
     const id = setInterval(() => setFrame(f => f === 1 ? 2 : 1), 300)
     return () => { clearInterval(id); setFrame(1) }
   }, [persona.id])
@@ -95,6 +96,7 @@ function CharEquipScreen({ persona }: CharScreenProps) {
     persona.id === 'auteur'    ? `/walking-${frame}.png` :
     persona.id === 'wordsmith' ? `/idle-${frame}.png`    :
     persona.id === 'bard'      ? `/weights-${frame}.png` :
+    persona.id === 'ghost'     ? `/kirby-${frame}.png` :
     '/pixel.png'
 
   return (
