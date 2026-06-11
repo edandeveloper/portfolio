@@ -27,10 +27,15 @@ const containerVariants = {
 interface GearSlotProps {
   slot: GearSlotData
   personaColor: string
+  flip?: boolean
 }
 
-function GearSlot({ slot, personaColor }: GearSlotProps) {
+function GearSlot({ slot, personaColor, flip = false }: GearSlotProps) {
   const [hovered, setHovered] = useState(false)
+
+  const tooltipStyle: React.CSSProperties = flip
+    ? { right: 'calc(100% + 8px)', left: 'auto', bottom: 'auto', top: '50%', transform: 'translateY(-50%)' }
+    : { left: 'calc(100% + 8px)', right: 'auto', bottom: 'auto', top: '50%', transform: 'translateY(-50%)' }
 
   return (
     <div className="relative flex flex-col items-center gap-0.5">
@@ -58,9 +63,10 @@ function GearSlot({ slot, personaColor }: GearSlotProps) {
         {hovered && (
           <motion.div
             className="gear-tooltip"
-            initial={{ opacity: 0, y: 4, scale: 0.95 }}
-            animate={{ opacity: 1, y: 0, scale: 1 }}
-            exit={{ opacity: 0, y: 4, scale: 0.95 }}
+            style={tooltipStyle}
+            initial={{ opacity: 0, x: flip ? 4 : -4, scale: 0.95 }}
+            animate={{ opacity: 1, x: 0, scale: 1 }}
+            exit={{ opacity: 0, x: flip ? 4 : -4, scale: 0.95 }}
             transition={{ duration: 0.12 }}
           >
             <div className="font-ui font-bold text-xs text-text-primary">{slot.name}</div>
@@ -168,7 +174,7 @@ function CharEquipScreen({ persona }: CharScreenProps) {
         {/* Right column — accessories */}
         <div className="char-screen-right">
           {persona.rightGear.map(g => (
-            <GearSlot key={g.slot} slot={g} personaColor={persona.color} />
+            <GearSlot key={g.slot} slot={g} personaColor={persona.color} flip />
           ))}
         </div>
       </div>
