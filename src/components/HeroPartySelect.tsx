@@ -88,13 +88,13 @@ function CharEquipScreen({ persona }: CharScreenProps) {
   useEffect(() => {
     const animated = ['auteur', 'wordsmith', 'bard', 'ghost']
     if (!animated.includes(persona.id)) return
-    const id = setInterval(() => setFrame(f => f === 1 ? 2 : 1), 300)
+    const id = setInterval(() => setFrame(f => f === 1 ? 2 : 1), 500)
     return () => { clearInterval(id); setFrame(1) }
   }, [persona.id])
 
   const spriteUrl =
     persona.id === 'auteur'    ? `/working-${frame}.png` :
-    persona.id === 'wordsmith' ? `/idle-${frame}.png`    :
+    persona.id === 'wordsmith' ? `/filming-${frame}.png`  :
     persona.id === 'bard'      ? `/weights-${frame}.png` :
     persona.id === 'ghost'     ? `/kirby-${frame}.png` :
     '/pixel.png'
