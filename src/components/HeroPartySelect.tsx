@@ -1,7 +1,14 @@
 import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { personas } from '../data/personas'
-import type { GearSlotData } from '../data/personas'
+import type { GearSlotData, PersonaData } from '../data/personas'
+
+const MINI_SPRITES: Record<string, [string, string]> = {
+  auteur:    ['/mini-3.png', '/mini-4.png'],
+  wordsmith: ['/mini-1.png', '/mini-2.png'],
+  bard:      ['/mini-5.png', '/mini-6.png'],
+  ghost:     ['/mini-7.png', '/mini-8.png'],
+}
 
 const stats = [
   { label: 'VISION',    sublabel: 'Photography / Film', value: 85, color: '#ffd700' },
@@ -79,6 +86,46 @@ function GearSlot({ slot, personaColor, flip = false }: GearSlotProps) {
         )}
       </AnimatePresence>
     </div>
+  )
+}
+
+// ── Party Member Card ─────────────────────────────────────────────────────────
+
+interface PartyMemberCardProps {
+  persona: PersonaData
+  active: boolean
+  onClick: () => void
+}
+
+function PartyMemberCard({ persona, active, onClick }: PartyMemberCardProps) {
+  const [frame, setFrame] = useState(0)
+  const sprites = MINI_SPRITES[persona.id]
+
+  useEffect(() => {
+    const id = setInterval(() => setFrame(f => f === 0 ? 1 : 0), 500)
+    return () => clearInterval(id)
+  }, [])
+
+  return (
+    <button
+      onClick={onClick}
+      className="party-member-card"
+      style={{
+        borderColor: active ? persona.color : 'rgba(78, 204, 163, 0.2)',
+        boxShadow: active ? `0 0 14px ${persona.color}44, inset 0 0 8px ${persona.color}11` : undefined,
+        background: active ? `${persona.color}0d` : undefined,
+      }}
+    >
+      <div className="party-member-sprite">
+        <img src={sprites[frame]} alt={persona.name} className="mini-sprite-img" />
+      </div>
+      <div
+        className="party-member-name"
+        style={{ color: active ? persona.color : '#8899aa' }}
+      >
+        {persona.name}
+      </div>
+    </button>
   )
 }
 
@@ -239,26 +286,24 @@ export default function HeroPartySelect() {
           </motion.div>
         </motion.div>
 
-        {/* Persona tabs */}
+        {/* Party Members */}
         <motion.div
           variants={fadeUp}
           initial="hidden"
           animate="visible"
-          className="flex flex-wrap justify-center gap-1 mb-4"
+          className="party-members-panel mb-4"
         >
-          {personas.map((p, i) => (
-            <button
-              key={p.id}
-              onClick={() => setActiveIndex(i)}
-              className="persona-tab"
-              style={{
-                borderBottomColor: activeIndex === i ? p.color : 'transparent',
-                color: activeIndex === i ? p.color : undefined,
-              }}
-            >
-              {p.name}
-            </button>
-          ))}
+          <div className="ffxiv-panel-title">PARTY MEMBERS</div>
+          <div className="party-members-grid">
+            {personas.map((p, i) => (
+              <PartyMemberCard
+                key={p.id}
+                persona={p}
+                active={activeIndex === i}
+                onClick={() => setActiveIndex(i)}
+              />
+            ))}
+          </div>
         </motion.div>
 
         {/* FFXIV character equipment screen */}
